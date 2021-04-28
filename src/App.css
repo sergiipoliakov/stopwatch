@@ -1,0 +1,58 @@
+.App {
+	text-align: center;
+}
+
+.App-header {
+	background-color: #333b4b;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+.stopwatch-container {
+	margin-bottom: 30px;
+	font-family: Arial;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 5px;
+}
+.btn-container {
+	text-align: center;
+}
+
+.btn {
+	height: 36px;
+	width: 10vw;
+	padding: 0 16px;
+	margin: 10px;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 2px;
+	display: inline-block;
+	line-height: 36px;
+	vertical-align: middle;
+	font-size: 14px;
+	outline: 0;
+	text-decoration: none;
+	color: #fff;
+	background-color: #26a69a;
+	text-align: center;
+	letter-spacing: 0.5px;
+	transition: background-color 0.2s ease-out;
+	cursor: pointer;
+	box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%),
+		0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+.btn:hover {
+	box-shadow: 0 0 5px 0;
+	transition: 0.3s;
+	background-color: #2bbbad;
+}
+.btn:disabled {
+	background-color: #dfdfdf;
+	color: #9f9f9f;
+	pointer-events: none;
+}
