@@ -8,17 +8,17 @@ function StopWatch() {
 	const [watchOn, setWatchOn] = useState(false);
 
 	useEffect(() => {
-		const unsubscribe$ = new Subject();
+		const stream$ = new Subject();
 		interval(1000)
-			.pipe(takeUntil(unsubscribe$))
+			.pipe(takeUntil(stream$))
 			.subscribe(() => {
 				if (watchOn) {
 					setTime((val) => val + 10);
 				}
 			});
 		return () => {
-			unsubscribe$.next();
-			unsubscribe$.complete();
+			stream$.next();
+			stream$.complete();
 		};
 	}, [watchOn]);
 
