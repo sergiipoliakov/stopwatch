@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { interval, Subject } from "rxjs";
+import { interval, Subject, Observable } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 function StopWatch() {
@@ -8,18 +8,37 @@ function StopWatch() {
 	const [watchOn, setWatchOn] = useState(false);
 
 	useEffect(() => {
-		const stream$ = new Subject();
-		interval(1000)
-			.pipe(takeUntil(stream$))
-			.subscribe(() => {
+		// const stream$ = new Subject();
+		// interval(1000)
+		// 	.pipe(takeUntil(stream$))
+		// 	.subscribe(() => {
+		// 		if (watchOn) {
+		// 			setTime((val) => val + 10);
+		// 		}
+		// 	});
+		// return () => {
+		// 	stream$.next();
+		// 	stream$.complete();
+		// };
+
+		const stream$ = new Observable((observer) => {
+			const sub = interval(1000).subscribe(() => {
 				if (watchOn) {
 					setTime((val) => val + 10);
+				} else {
+					sub.unsubscribe();
 				}
 			});
-		return () => {
-			stream$.next();
-			stream$.complete();
-		};
+		});
+		console.log(stream$);
+		stream$.subscribe(
+			(val) => console.log(val),
+			(err) => console.log(err),
+			() => {
+				console.log("completed");
+			}
+		);
+		console.log(stream$);
 	}, [watchOn]);
 
 	const handleStart = () => {
